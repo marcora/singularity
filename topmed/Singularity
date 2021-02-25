@@ -4,11 +4,7 @@ OSVersion: 7
 MirrorURL: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/
 Include: yum
 
-# The default command to run once our image is finished.
-%runscript
-    Rscript $@
-    
-# Installing the software in our image.
+# Install software in the image and test
 %post
     yum -y install epel-release
     yum -y install R
@@ -19,7 +15,7 @@ Include: yum
     yum -y install tar
     yum -y install gzip
     echo "export PATH=$HOME/bin:$PATH" > .bashrc
-    mkdir bin
+    mkdir -p bin
     cd bin
     wget http://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20201019.zip
     unzip plink_linux_x86_64_20201019.zip
@@ -31,6 +27,9 @@ Include: yum
     Rscript install_packages.R
     # Rscript -e 'if (! require(rstan)) install.packages("rstan", repo="http://cran.rstudio.com/")'
 
-# Command
 %test
     Rscript -e 'library(GENESIS)'
+
+# This gets run when you run the image!
+%runscript
+    echo "TopMed analysis pipeline"
