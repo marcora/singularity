@@ -16,6 +16,8 @@ Include: yum
     yum -y install bcftools
     yum -y install wget
     yum -y install unzip
+    yum -y install tar
+    yum -y install gzip
     echo "export PATH=$HOME/bin:$PATH" > .bashrc
     mkdir bin
     cd bin
