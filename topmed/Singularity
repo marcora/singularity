@@ -13,6 +13,17 @@ Include: yum
     yum -y install epel-release
     yum -y install R
     yum -y install git
+    yum -y install bcftools
+    yum -y install wget
+    yum -y install unzip
+    echo "export PATH=$HOME/bin:$PATH" > .bashrc
+    mkdir bin
+    cd bin
+    wget http://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20201019.zip
+    unzip plink_linux_x86_64_20201019.zip
+    wget http://people.virginia.edu/~wc9c/KING/Linux-king.tar.gz
+    tar -xzvf Linux-king.tar.gz
+    cd ..
     git clone https://github.com/UW-GAC/analysis_pipeline.git
     cd analysis_pipeline
     Rscript install_packages.R
