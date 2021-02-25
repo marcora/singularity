@@ -12,8 +12,12 @@ Include: yum
 %post
     yum -y install epel-release
     yum -y install R
-    Rscript -e 'if (! require(rstan)) install.packages("rstan", repo="http://cran.rstudio.com/")'
+    yum -y install git
+    git clone https://github.com/UW-GAC/analysis_pipeline.git
+    cd analysis_pipeline
+    Rscript install_packages.R
+    # Rscript -e 'if (! require(rstan)) install.packages("rstan", repo="http://cran.rstudio.com/")'
 
 # Command
 %test
-    Rscript -e 'library(rstan)'
+    Rscript -e 'library(GENESIS)'
